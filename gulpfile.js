@@ -13,6 +13,7 @@ var gulp = require('gulp');
     mqpacker = require('css-mqpacker');
     atImport = require('postcss-import');
     atExtend = require('postcss-extend');
+    mixins = require('postcss-mixins');
 
 /*
 FILE PATHS
@@ -38,6 +39,7 @@ gulp.task('css', function () {
     var processors = [
         atImport,
         atExtend,
+        mixins,
         autoprefixer,
         simplevars,
         mqpacker,

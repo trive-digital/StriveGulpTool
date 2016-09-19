@@ -8,6 +8,7 @@
     "gulp-postcss": "~6.2.0",
     "postcss-extend": "^1.0.5",
     "postcss-import": "^8.1.2",
+    "postcss-mixins": "^5.2.0",
     "postcss-nested": "~1.0.0",
     "postcss-simple-vars": "~3.0.0"
   }
