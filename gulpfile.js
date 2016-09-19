@@ -11,6 +11,7 @@ var gulp = require('gulp');
     autoprefixer = require('autoprefixer');
     cssnano = require('cssnano');
     mqpacker = require('css-mqpacker');
+    atImport = require('postcss-import');
 
 /*
 FILE PATHS
@@ -34,13 +35,14 @@ CSS
 
 gulp.task('css', function () {
     var processors = [
+        atImport,
         autoprefixer,
         simplevars,
         mqpacker,
         nestedcss,
-        cssnano
+        //cssnano
     ];
-    return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/**/*.css')
+    return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/style.css')
         .pipe(postcss(processors))
         .pipe(browserSync.stream())
         .pipe(gulp.dest(paths.rootPath + paths.cssDest + paths.lang + '/css'));
