@@ -12,6 +12,7 @@ var gulp = require('gulp');
     cssnano = require('cssnano');
     mqpacker = require('css-mqpacker');
     atImport = require('postcss-import');
+    atExtend = require('postcss-extend');
 
 /*
 FILE PATHS
@@ -36,6 +37,7 @@ CSS
 gulp.task('css', function () {
     var processors = [
         atImport,
+        atExtend,
         autoprefixer,
         simplevars,
         mqpacker,
