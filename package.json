@@ -6,6 +6,7 @@
     "cssnano": "^3.7.4",
     "gulp": "~3.9.1",
     "gulp-postcss": "~6.2.0",
+    "gulp-sourcemaps": "^1.6.0",
     "postcss-extend": "^1.0.5",
     "postcss-import": "^8.1.2",
     "postcss-mixins": "^5.2.0",
