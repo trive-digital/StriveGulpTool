@@ -16,6 +16,7 @@ var gulp = require('gulp');
     mixins = require('postcss-mixins');
     sourcemaps = require('gulp-sourcemaps');
     lost = require('lost');
+    type = require('postcss-responsive-type');
 
 /*
 FILE PATHS
@@ -46,7 +47,8 @@ gulp.task('css', function () {
         simplevars,
         mqpacker,
         nestedcss,
-        lost
+        lost,
+        type
         //cssnano
     ];
     return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/style.css')
