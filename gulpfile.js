@@ -15,6 +15,7 @@ var gulp = require('gulp');
     atExtend = require('postcss-extend');
     mixins = require('postcss-mixins');
     sourcemaps = require('gulp-sourcemaps');
+    lost = require('lost');
 
 /*
 FILE PATHS
@@ -45,12 +46,13 @@ gulp.task('css', function () {
         simplevars,
         mqpacker,
         nestedcss,
+        lost
         //cssnano
     ];
     return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/style.css')
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
-        .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write())
         .pipe(browserSync.stream())
         .pipe(gulp.dest(paths.rootPath + paths.cssDest + paths.lang + '/css'));
 });
