@@ -17,6 +17,7 @@ var gulp = require('gulp');
     sourcemaps = require('gulp-sourcemaps');
     lost = require('lost');
     type = require('postcss-responsive-type');
+    customMedia = require("postcss-custom-media");
 
 /*
 FILE PATHS
@@ -41,6 +42,7 @@ CSS
 gulp.task('css', function () {
     var processors = [
         atImport,
+        customMedia,
         atExtend,
         mixins,
         autoprefixer,
