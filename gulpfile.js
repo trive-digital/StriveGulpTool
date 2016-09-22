@@ -6,13 +6,13 @@ REQUIRED
 var gulp = require('gulp');
     browserSync = require('browser-sync').create();
     postcss = require('gulp-postcss');
+    atImport = require('postcss-import');
     simplevars = require('postcss-simple-vars');
+    atExtend = require('postcss-extend');
     nestedcss = require('postcss-nested');
     autoprefixer = require('autoprefixer');
     cssnano = require('cssnano');
     mqpacker = require('css-mqpacker');
-    atImport = require('postcss-import');
-    atExtend = require('postcss-extend');
     mixins = require('postcss-mixins');
     sourcemaps = require('gulp-sourcemaps');
     lost = require('lost');
@@ -43,12 +43,12 @@ gulp.task('css', function () {
     var processors = [
         atImport,
         customMedia,
-        atExtend,
-        mixins,
+        mixins, /* Needs to go before postcss-simple-vars & postcss-nested! */
         autoprefixer,
         simplevars,
         mqpacker,
         nestedcss,
+        atExtend, /* Needs to go after nestedcss! */
         lost,
         type
         //cssnano
