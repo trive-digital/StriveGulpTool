@@ -57,6 +57,7 @@ gulp.task('css', function () {
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(sourcemaps.write())
+        .pipe(gulp.dest(paths.rootPath + paths.cssSrc + '/css'))
         .pipe(browserSync.stream())
         .pipe(gulp.dest(paths.rootPath + paths.cssDest + paths.lang + '/css'));
 });
