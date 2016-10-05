@@ -1,4 +1,5 @@
 /*
+
 REQUIRED
 ========
 */
@@ -20,13 +21,14 @@ var gulp = require('gulp');
     customMedia = require("postcss-custom-media");
 
 /*
+
 FILE PATHS
 ==========
 */
 
 var paths = {
-    bsProxy: 'localhost/m2/',
-    rootPath: '/srv/http/m2/',
+    bsProxy: '127.0.0.1/m2/',
+    rootPath: '/Applications/AMPPS/www/m2/',
     cssSrc: 'app/design/frontend/JakeSharp/blank/web',
     cssParent: 'wip',
     cssDest: 'pub/static/frontend/JakeSharp/blank/',
@@ -46,8 +48,8 @@ gulp.task('css', function () {
         mixins, /* Needs to go before postcss-simple-vars & postcss-nested! */
         autoprefixer,
         simplevars,
-        mqpacker,
         nestedcss,
+        mqpacker, /* Needs to go after nestedcss! */
         atExtend, /* Needs to go after nestedcss! */
         lost,
         type
@@ -63,6 +65,7 @@ gulp.task('css', function () {
 });
 
 /*
+
 BROWSERSYNC
 ===========
 */
@@ -76,6 +79,7 @@ gulp.task('browser-sync', function() {
 });
 
 /*
+
 WATCH
 =====
 */
