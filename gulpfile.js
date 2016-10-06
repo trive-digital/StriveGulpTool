@@ -19,6 +19,7 @@ var gulp = require('gulp');
     lost = require('lost');
     type = require('postcss-responsive-type');
     customMedia = require("postcss-custom-media");
+    colorFunction = require("postcss-color-function");
 
 /*
 
@@ -52,7 +53,8 @@ gulp.task('css', function () {
         mqpacker, /* Needs to go after nestedcss! */
         atExtend, /* Needs to go after nestedcss! */
         lost,
-        type
+        type,
+        colorFunction
         //cssnano
     ];
     return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/style.css')
