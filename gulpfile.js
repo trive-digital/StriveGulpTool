@@ -20,6 +20,7 @@ var gulp = require('gulp');
     type = require('postcss-responsive-type');
     customMedia = require("postcss-custom-media");
     colorFunction = require("postcss-color-function");
+    rename = require('gulp-rename');
     rimraf = require('gulp-rimraf');
     exec = require('child_process').exec;
 
@@ -70,6 +71,23 @@ gulp.task('css', function () {
 
 /*
 
+HTML, IMAGES & JS
+=================
+*/
+
+var files = [paths.rootPath + paths.cssSrc + '/../**/*.{gif,jpg,png,svg,html,js}',
+            '!./node_modules/**'];
+
+gulp.task('static', function() {
+    gulp.src(files)
+    .pipe(rename(function (path) {
+        path.dirname = path.dirname.replace("web/", "/");
+    }))
+    .pipe(gulp.dest(paths.rootPath + paths.cssDest + paths.lang));
+});
+
+/*
+
 BROWSERSYNC
 ===========
 */
@@ -83,6 +101,7 @@ gulp.task('browser-sync', function() {
 });
 
 /*
+
 CLEAN
 =====
 */
@@ -102,6 +121,7 @@ gulp.task('clean', function(cb) {
 });
 
 /*
+
 DEPLOY
 ======
 */
@@ -122,9 +142,11 @@ WATCH
 */
 
 gulp.task('watch', ['browser-sync'], function() {
-    // Watch .css files
+    // Watch css files
     gulp.watch(paths.rootPath + paths.cssSrc + '/src/preCSS/**/*.css', ['css']);
+    //Watch html, images & js
+    gulp.watch(files, ['static']);
 });
 
-gulp.task('default', ['css', 'watch'], function() {
+gulp.task('default', ['css', 'static', 'watch'], function() {
 });

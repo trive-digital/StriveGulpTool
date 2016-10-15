@@ -6,6 +6,7 @@
     "cssnano": "^3.7.4",
     "gulp": "~3.9.1",
     "gulp-postcss": "~6.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "lost": "^7.1.0",
