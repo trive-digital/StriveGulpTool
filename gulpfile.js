@@ -30,11 +30,11 @@ FILE PATHS
 */
 
 var paths = {
-    bsProxy: '127.0.0.1/m2/',
+    bsProxy: 'localhost/m2/',
     rootPath: '/srv/http/m2/',
-    cssSrc: 'app/design/frontend/JakeSharp/blank/web',
-    cssParent: 'wip',
-    cssDest: 'pub/static/frontend/JakeSharp/blank/',
+    cssSrc: 'app/design/frontend/JakeSharp/theme/web',
+    cssParentSrc: 'app/design/frontend/JakeSharp/blank/web',
+    cssDest: 'pub/static/frontend/JakeSharp/theme/',
     lang: 'en_US'
 }
 
@@ -46,7 +46,7 @@ CSS
 
 gulp.task('css', function () {
     var processors = [
-        atImport,
+        atImport({path: [paths.rootPath + paths.cssParentSrc + "/src/preCSS"]}),
         customMedia,
         mixins, /* Needs to go before postcss-simple-vars & postcss-nested! */
         autoprefixer,
