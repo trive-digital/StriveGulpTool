@@ -20,6 +20,7 @@ var gulp = require('gulp');
     type = require('postcss-responsive-type');
     customMedia = require("postcss-custom-media");
     colorFunction = require("postcss-color-function");
+    exec = require('child_process').exec;
 
 /*
 
@@ -29,7 +30,7 @@ FILE PATHS
 
 var paths = {
     bsProxy: '127.0.0.1/m2/',
-    rootPath: '/Applications/AMPPS/www/m2/',
+    rootPath: '/srv/http/m2/',
     cssSrc: 'app/design/frontend/JakeSharp/blank/web',
     cssParent: 'wip',
     cssDest: 'pub/static/frontend/JakeSharp/blank/',
@@ -79,6 +80,20 @@ gulp.task('browser-sync', function() {
         port: 8080
     });
 });
+
+/*
+DEPLOY
+======
+*/
+
+gulp.task('deploy', function (cb) {
+    exec(paths.rootPath + 'bin/magento setup:static-content:deploy',
+        function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            cb(err);
+    });
+})
 
 /*
 
