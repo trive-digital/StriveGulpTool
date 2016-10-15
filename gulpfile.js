@@ -20,6 +20,7 @@ var gulp = require('gulp');
     type = require('postcss-responsive-type');
     customMedia = require("postcss-custom-media");
     colorFunction = require("postcss-color-function");
+    rimraf = require('gulp-rimraf');
     exec = require('child_process').exec;
 
 /*
@@ -79,6 +80,25 @@ gulp.task('browser-sync', function() {
         notify: true,
         port: 8080
     });
+});
+
+/*
+CLEAN
+=====
+*/
+
+gulp.task('clean', function(cb) {
+    return gulp.src([
+        paths.rootPath + 'pub/static/*',
+        '!' + paths.rootPath + 'pub/static/.htaccess',
+        '!' + paths.rootPath + 'pub/static/frontend/',
+        paths.rootPath + 'pub/static/frontend/*',
+        '!' + paths.rootPath + 'pub/static/frontend/Magento/',
+        paths.rootPath + 'var/cache/*',
+        paths.rootPath + 'var/generation/*',
+        paths.rootPath + 'var/view_preprocessed/*'
+    ], {read: false})
+    .pipe(rimraf({ force: true }));
 });
 
 /*
