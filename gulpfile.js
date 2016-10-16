@@ -33,9 +33,9 @@ FILE PATHS
 var paths = {
     bsProxy: 'localhost/m2/',
     rootPath: '/srv/http/m2/',
-    cssSrc: 'app/design/frontend/JakeSharp/theme/web',
-    cssParentSrc: 'app/design/frontend/JakeSharp/blank/web',
-    cssDest: 'pub/static/frontend/JakeSharp/theme/',
+    cssSrc: 'app/design/frontend/Trive/theme/web',
+    cssParentSrc: 'app/design/frontend/Trive/blank/web',
+    cssDest: 'pub/static/frontend/Trive/theme/',
     lang: 'en_US'
 }
 
