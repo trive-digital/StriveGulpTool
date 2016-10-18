@@ -31,11 +31,11 @@ FILE PATHS
 */
 
 var paths = {
-    bsProxy: 'localhost/m2/',
-    rootPath: '/srv/http/m2/',
-    cssSrc: 'app/design/frontend/Trive/theme/web',
+    bsProxy: '127.0.0.1/m2/',
+    rootPath: '/Applications/AMPPS/www/m2/',
+    cssSrc: 'app/design/frontend/Trive/blank/web',
     cssParentSrc: 'app/design/frontend/Trive/blank/web',
-    cssDest: 'pub/static/frontend/Trive/theme/',
+    cssDest: 'pub/static/frontend/Trive/blank/',
     lang: 'en_US'
 }
 
@@ -60,7 +60,8 @@ gulp.task('css', function () {
         colorFunction
         //cssnano
     ];
-    return gulp.src(paths.rootPath + paths.cssSrc + '/src/preCSS/style.css')
+    return gulp.src([paths.rootPath + paths.cssSrc + '/src/preCSS/style.css',
+                     paths.rootPath + paths.cssSrc + '/src/preCSS/print.css'])
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(sourcemaps.write())
