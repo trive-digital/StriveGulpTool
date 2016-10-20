@@ -76,8 +76,7 @@ HTML, IMAGES & JS
 =================
 */
 
-var files = [paths.rootPath + paths.cssSrc + '/../**/*.{gif,jpg,png,svg,html,js}',
-            '!./node_modules/**'];
+var files = [paths.rootPath + paths.cssSrc + '/../**/*.{gif,jpg,png,svg,html,js}'];
 
 gulp.task('static', function() {
     gulp.src(files)
