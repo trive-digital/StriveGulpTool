@@ -50,7 +50,7 @@ gulp.task('css', function () {
         atImport({path: [paths.rootPath + paths.cssParentSrc + "/src/preCSS"]}),
         customMedia,
         mixins, /* Needs to go before postcss-simple-vars & postcss-nested! */
-        autoprefixer,
+        autoprefixer({browsers: ['last 2 versions', '> 5%']}),
         simplevars,
         nestedcss,
         mqpacker, /* Needs to go after nestedcss! */
