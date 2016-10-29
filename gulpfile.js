@@ -148,7 +148,9 @@ WATCH
 
 gulp.task('watch', ['browser-sync'], function() {
     // Watch css files
-    gulp.watch(paths.rootPath + paths.cssSrc + '/web/src/preCSS/**/*.css', ['css']);
+    watch(paths.rootPath + paths.cssSrc + '/web/src/preCSS/**/*.css', function() {
+        gulp.start('css');
+    });
 });
 
 gulp.task('default', ['css', 'static', 'watch'], function() {
