@@ -22,6 +22,7 @@ var gulp = require('gulp');
     colorFunction = require("postcss-color-function");
     rename = require('gulp-rename');
     rimraf = require('gulp-rimraf');
+    watch = require('gulp-watch');
     exec = require('child_process').exec;
 
 /*
@@ -33,8 +34,8 @@ FILE PATHS
 var paths = {
     bsProxy: '127.0.0.1/m2/',
     rootPath: '/Applications/AMPPS/www/m2/',
-    cssSrc: 'app/design/frontend/Trive/blank/web',
-    cssParentSrc: 'app/design/frontend/Trive/blank/web',
+    cssSrc: 'app/design/frontend/Trive/blank',
+    cssParentSrc: 'app/design/frontend/Trive/blank',
     cssDest: 'pub/static/frontend/Trive/blank/',
     lang: 'en_US'
 }
@@ -47,7 +48,7 @@ CSS
 
 gulp.task('css', function () {
     var processors = [
-        atImport({path: [paths.rootPath + paths.cssParentSrc + "/src/preCSS"]}),
+        atImport({path: [paths.rootPath + paths.cssParentSrc + "/web/src/preCSS"]}),
         customMedia,
         mixins, /* Needs to go before postcss-simple-vars & postcss-nested! */
         autoprefixer({browsers: ['last 2 versions', '> 5%']}),
@@ -60,26 +61,30 @@ gulp.task('css', function () {
         colorFunction
         //cssnano
     ];
-    return gulp.src([paths.rootPath + paths.cssSrc + '/src/preCSS/style.css',
-                     paths.rootPath + paths.cssSrc + '/src/preCSS/print.css'])
+    return gulp.src([paths.rootPath + paths.cssSrc + '/web/src/preCSS/style.css',
+                     paths.rootPath + paths.cssSrc + '/web/src/preCSS/print.css'])
         .pipe(sourcemaps.init())
         .pipe(postcss(processors))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(paths.rootPath + paths.cssSrc + '/css'))
+        .pipe(gulp.dest(paths.rootPath + paths.cssSrc + '/web/css'))
         .pipe(browserSync.stream())
         .pipe(gulp.dest(paths.rootPath + paths.cssDest + paths.lang + '/css'));
 });
 
 /*
 
-HTML, IMAGES & JS
-=================
+IMAGES, HTML, CSS & JS
+======================
 */
 
-var files = [paths.rootPath + paths.cssSrc + '/../**/*.{gif,jpg,png,svg,html,js}'];
+var filesDir = paths.cssSrc.replace("vendor/trive/", "");
+    /* remove 'vendor/trive/' from file path if the theme is installed through composer,
+      strive-gulp dir shares the same parent dir like theme-frontend-strive dir */
+    files = ['../' + filesDir + '/**/*.{gif,jpg,png,svg,html,css,js}'];
 
 gulp.task('static', function() {
     gulp.src(files)
+    .pipe(watch(files))
     .pipe(rename(function (path) {
         path.dirname = path.dirname.replace("web/", "/");
     }))
@@ -143,9 +148,7 @@ WATCH
 
 gulp.task('watch', ['browser-sync'], function() {
     // Watch css files
-    gulp.watch(paths.rootPath + paths.cssSrc + '/src/preCSS/**/*.css', ['css']);
-    //Watch html, images & js
-    gulp.watch(files, ['static']);
+    gulp.watch(paths.rootPath + paths.cssSrc + '/web/src/preCSS/**/*.css', ['css']);
 });
 
 gulp.task('default', ['css', 'static', 'watch'], function() {
