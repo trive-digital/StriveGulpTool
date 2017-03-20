@@ -33,11 +33,12 @@ FILE PATHS
 
 var paths = {
     bsProxy: '127.0.0.1/m2/',
-    rootPath: '/Applications/AMPPS/www/m2/',
-    cssSrc: 'app/design/frontend/Trive/blank',
-    cssParentSrc: 'app/design/frontend/Trive/blank',
+    rootPath: '/Users/bonus/Sites/m2/',
+    cssSrc: 'vendor/trive/theme-frontend-strive',
+    cssParentSrc: 'vendor/trive/theme-frontend-strive',
     cssDest: 'pub/static/frontend/Trive/blank/',
-    lang: 'en_US'
+    lang: 'en_US',
+    exclThemes: '--exclude-theme "Magento/luma" --exclude-theme "Magento/blank"'
 }
 
 /*
@@ -127,12 +128,27 @@ gulp.task('clean', function(cb) {
 
 /*
 
+SETUP:UPGRADE
+=============
+*/
+
+gulp.task('upgrade', function (cb) {
+    exec(paths.rootPath + 'bin/magento setup:upgrade',
+        function (err, stdout, stderr) {
+            console.log(stdout);
+            console.log(stderr);
+            cb(err);
+    });
+})
+
+/*
+
 DEPLOY
 ======
 */
 
 gulp.task('deploy', function (cb) {
-    exec(paths.rootPath + 'bin/magento setup:static-content:deploy',
+    exec(paths.rootPath + 'bin/magento setup:static-content:deploy' + ' ' + paths.exclThemes + ' ' + paths.lang,
         function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
