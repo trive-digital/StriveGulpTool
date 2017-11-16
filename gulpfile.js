@@ -33,9 +33,9 @@ FILE PATHS
 
 var paths = {
     bsProxy: '127.0.0.1/m2/',
-    rootPath: '/Users/bonus/Sites/m2/',
-    cssSrc: 'vendor/trive/theme-frontend-strive',
-    cssParentSrc: 'vendor/trive/theme-frontend-strive',
+    rootPath: '/var/www/html/m2/',
+    cssSrc: 'app/design/frontend/Trive/blank',
+    cssParentSrc: 'app/design/frontend/Trive/blank',
     cssDest: 'pub/static/frontend/Trive/blank/',
     lang: 'en_US',
     exclThemes: '--exclude-theme "Magento/luma" --exclude-theme "Magento/blank"'
@@ -148,7 +148,7 @@ DEPLOY
 */
 
 gulp.task('deploy', function (cb) {
-    exec(paths.rootPath + 'bin/magento setup:static-content:deploy' + ' ' + paths.exclThemes + ' ' + paths.lang,
+    exec(paths.rootPath + 'bin/magento setup:static-content:deploy -f' + ' ' + paths.exclThemes + ' ' + paths.lang,
         function (err, stdout, stderr) {
             console.log(stdout);
             console.log(stderr);
